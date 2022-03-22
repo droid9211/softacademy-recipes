@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Static Template</title>
+    <link
+      rel="stylesheet"
+      href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+    <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light mb-5">
+        <a class="navbar-brand" href="#">🍉 Любими Рецепти</a>
+      </nav>
+      <div class="row">
+        <div class="col-sm-4">
+          <aside class="sticky-top">
+            <h2 class="mb-4">Филтри</h2>
+            <div class="form-group mb-4">
+              <div class="d-flex justify-content-between mb-1">
+                <label>
+                  Калории
+                </label>
+                <span id="amount"></span>
+              </div>
+              <div id="slider-range"></div>
+            </div>
+            <div class="form-group mb-4">
+              <label for="food-type">Тип ястие</label>
+              <select id="food-type" class="custom-select">
+                <option value="" selected> - Избери - </option>
+                <option value="breakfast">Закуска</option>
+                <option value="main">Основно</option>
+                <option value="dessert">Десерт</option>
+              </select>
+            </div>
+          </aside>
+        </div>
+        <div class="col-sm-8">
+          <div class="d-flex justify-content-between align-items-center">
+            <h1 class="mb-4">Рецепти</h1>
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-toggle="modal"
+              data-target="#addModal"
+            >
+              + Добави
+            </button>
+          </div>
+          <div id="recipes-list"></div>
+        </div>
+      </div>
+      <footer class="main-footer">
+        Сайт за любими рецепти
+      </footer>
+    </div>
+
+    <div id="templates">
+      <div id="recipe-template" class="d-none card mb-3">
+        <div class="row no-gutters">
+          <div class="col-md-4">
+            <img
+              src=""
+              class="card-img"
+              alt="..."
+            />
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title"></h5>
+              <p class="card-text card-description"></p>
+              <p class="card-text text-success card-calories"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="modals">
+      <div
+        class="modal fade"
+        id="addModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="addModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="addModalLabel">Добави рецепта</h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form id="add-recipe-form">
+                <div class="form-group">
+                  <label for="recipe-title" class="col-form-label">Заглавие на рецептата:</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="title"
+                    id="recipe-title"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="recipe-image" class="col-form-label">URL с изображение:</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="image"
+                    id="recipe-image"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="recipe-calories" class="col-form-label">Калории:</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    name="calories"
+                    id="recipe-calories"
+                  />
+                </div>
+                <div class="form-group mb-4">
+                  <label for="form-food-type">Тип ястие</label>
+                  <select id="form-food-type" name="type" class="custom-select">
+                    <option selected> - Избери - </option>
+                    <option value="breakfast">Закуска</option>
+                    <option value="main">Основно</option>
+                    <option value="dessert">Десерт</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="recipe-description" class="col-form-label">Описание:</label>
+                  <textarea
+                    class="form-control"
+                    id="recipe-description"
+                    name="description"
+                  ></textarea>
+                </div>
+                <hr />
+                <button type="submit" class="btn btn-primary">
+                  Добави
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-light"
+                  data-dismiss="modal"
+                >
+                  Затвори
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+      integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"
+    ></script>
+    <script src="main.js"></script>
+  </body>
+</html>
